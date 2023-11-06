@@ -12,6 +12,15 @@ facts_list = [
     'Las redes sociales tienen aspectos positivos y negativos, y debemos ser conscientes de ambos cuando utilicemos estas plataformas.'
 ]
 
+def generatePassword():
+    NumberOfCharacters = 8
+    Characters = "1234567890qwertyuiopasdfghjklñzxcvbnm</*-+.,;:>"
+    password = ""
+    for i in range(NumberOfCharacters):
+        password += random.choice(Characters)
+    return password
+
+
 @app.route("/")
 def Home():
     return '<body style="font-family: sans-serif;"><h1>Hola, en esta página puedes aprender un par de cosas interesantes sobre las dependencias tecnológicas. </h1><a href="/random_fact">Ver un hecho al azar</a></body>'
@@ -19,5 +28,9 @@ def Home():
 @app.route("/random_fact")
 def facts():
     return f'<p style="font-family: sans-serif;">{random.choice(facts_list)}</p>'
+
+@app.route("/generate_password")
+def generate_password():
+    return f'<h1 style="font-family: sans-serif;">Aqui esta la contraseña generada:</h1><p style="font-family: sans-serif;">{generatePassword()}</p>'
 
 app.run(debug=True)
